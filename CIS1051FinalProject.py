@@ -55,7 +55,6 @@ def play_game(book_info, round_number, total_score, num_skips):
             round_number += 1
             print("Correct Answer: ", average_rating)
             print("Points Earned: ", calculate_reward(average_rating, user_guess))
-            print("Total Score: ", total_score)
             print()
             print()
             
