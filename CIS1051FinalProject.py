@@ -6,6 +6,7 @@ import random
 def select_random_book():
     df = pd.read_csv('books_data.csv')
     selected_book = df.sample(1).iloc[0]  # Select a random row and convert it to a Series
+    
     return selected_book['title'], selected_book['author'], selected_book['date_published'], selected_book['average_rating']
 
 
@@ -17,6 +18,7 @@ def directions():
         print("There are five total rounds, and you may skip the current question 5 times")
         print("A perfect guess is worth 200 points (1,000 max score)")
         print("Good luck!")
+        
         start_game = input("Enter any key to start: ")
         if start_game != "":
             break
@@ -33,16 +35,19 @@ def play_game(book_info, round_number, total_score, num_skips):
     print("Skips remaining: ", num_skips)
     user_guess = input("Guess the average rating (1-5) of the book, or type 'skip' to try another book: ")
 
+
     if user_guess == "skip":
         if num_skips > 0:
             print()
             print()
             num_skips -= 1
+            
             return round_number, total_score, num_skips  # Pass the information back to the main() function
         else:
             print("You have no skips left. Please guess the average rating (1-5) of the book.")
             print()
             print()
+            
             return play_game(book_info, round_number, total_score, num_skips)  # Call function again with the same input
     else:
         try:
@@ -53,11 +58,13 @@ def play_game(book_info, round_number, total_score, num_skips):
             print("Total Score: ", total_score)
             print()
             print()
+            
             return round_number, total_score + calculate_reward(average_rating, user_guess), num_skips  # Pass information back to main()
         except ValueError:
             print("Invalid input. Please enter a number 1-5, or 'skip'")
             print()
             print()
+            
             return play_game(book_info, round_number, total_score, num_skips)  # Call function again, same concept as line 44
 
 
